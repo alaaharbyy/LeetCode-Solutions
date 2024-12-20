@@ -14,6 +14,9 @@ func ArraySolutions(nums []int, n int, question int) any {
 	case 4:
 		//283. Move Zeroes
 		return moveZeroes(nums)
+	case 5:
+		//643. Maximum Average Subarray I
+		return findMaxAverage(nums, n)
 
 	}
 	return "invalid"
@@ -103,4 +106,21 @@ func moveZeroes(nums []int) []int {
 	}
 	return nums
 
+}
+
+//643. Maximum Average Subarray I
+func findMaxAverage(nums []int, k int) float64 {
+	sum := 0.0
+	for i := 0; i < k; i++ {
+		sum += float64(nums[i])
+	}
+	maxSum := sum
+
+	for i := k; i < len(nums); i++ {
+		sum += float64(nums[i]) - float64(nums[i-k])
+		if sum > maxSum {
+			maxSum = sum
+		}
+	}
+	return maxSum / float64(k)
 }
